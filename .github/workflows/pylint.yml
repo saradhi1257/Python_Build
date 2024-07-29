@@ -21,3 +21,17 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py')
+
+
+
+    - name: Run Hello World script
+      run: python helloworld.py 
+      
+    - name: Deploy to remote server
+      run: |
+        scp helloworld.py user@remote_host:/path/to/deploy
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
